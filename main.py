@@ -37,6 +37,13 @@ def word_count_map(doc):
     [('i', 1), ('am', 1), ('sam', 1), ('i', 1), ('am', 1)]
     """
     ###TODO
+    doc = doc.split()
+    map = []
+    for i in range (len(doc)):
+        tuple_i = (doc[i], 1)
+        map.append(tuple_i)
+    return map
+word_count_map('i am sam i am')
     
     
 
@@ -54,10 +61,9 @@ def word_count_reduce(group):
     NOTE: you should use call the `reduce` function here.
     """
     ###TODO
-    
-    
-
-
+    group_reduce = reduce(plus, 0, group[1])
+    word_count_reduce_tuple = (group[0], group_reduce)
+    return word_count_reduce_tuple
 def iterate(f, x, a):
     # done. do not change me.
     """
@@ -70,11 +76,9 @@ def iterate(f, x, a):
         return x
     else:
         return iterate(f, f(x, a[0]), a[1:])
-    
 def flatten(sequences):
     # done. do not change me.
     return iterate(plus, [], sequences)
-
 def collect(pairs):
     """
     # done. do not change me.
@@ -87,12 +91,9 @@ def collect(pairs):
     for pair in sorted(pairs):
         result[pair[0]].append(pair[1])
     return list(result.items())
-
-
 def plus(x, y):
     # done. do not change me.
     return x + y
-
 def reduce(f, id_, a):
     # done. do not change me.
     if len(a) == 0:
@@ -102,8 +103,9 @@ def reduce(f, id_, a):
     else:
         return f(reduce(f, id_, a[:len(a)//2]),
                  reduce(f, id_, a[len(a)//2:]))
-    
-    
+
+word_count_reduce(['i', [1,1]])
+
     
     
 ### PART TWO ###
